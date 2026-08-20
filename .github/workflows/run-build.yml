@@ -2,14 +2,13 @@ name: Run Kernel Build
 
 on:
   workflow_dispatch:
-    inputs:
-      variant:
-        description: 'Kernel Variant (e.g., Normal, Pocket)'
-        required: false
-        default: 'Normal'
+
+permissions:
+  contents: read
+  actions: write
 
 jobs:
-  build-gki:
+  trigger-build:
     uses: ./.github/workflows/build.yml
     with:
       version: 'android14-6.1'
@@ -18,8 +17,5 @@ jobs:
       sublevel: '75'
       os_patch_level: '2024-08'
       feature_set: 'FULL'
-      variant: ${{ inputs.variant }}
-      ksu_branch: 'main'
-      susfs_commit: 'gki-android14-6.1'
-      build_bypass: true
+      variant: 'Normal'
     secrets: inherit
