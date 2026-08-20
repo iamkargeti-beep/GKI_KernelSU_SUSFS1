@@ -1,0 +1,24 @@
+name: Run Kernel Build
+
+on:
+  workflow_dispatch: # This adds the manual "Run workflow" button!
+
+jobs:
+  trigger-build:
+    uses: ./.github/workflows/kernel-build.yml
+    with:
+      version: "android14-6.1"
+      android_version: "android14"
+      kernel_version: "6.1"
+      sublevel: "75"
+      os_patch_level: "2024-03"
+      variant: "Normal"
+      feature_set: "FULL"
+      ksu_branch: "main"
+      susfs_commit: "latest"
+      root_flavor: ""
+      root_commit: ""
+      nomount_commit: ""
+      preserve_abi: false
+      build_bypass: true
+    secrets: inherit
