@@ -5,7 +5,7 @@ on:
 
 jobs:
   trigger-build:
-    uses: ./.github/workflows/kernel-build.yml
+    uses: ./.github/workflows/build.yml
     with:
       version: "android14-6.1"
       android_version: "android14"
